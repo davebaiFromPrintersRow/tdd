@@ -1,6 +1,5 @@
 package com.dave.bai.kata1;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

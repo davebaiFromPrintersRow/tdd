@@ -18,7 +18,6 @@ public class StringCalculator {
     private static final String DEFAULT_DELIMITERS = "[,\n]";
 
     public int add(String rawUnhandledInput) {
-
         if (rawUnhandledInput.isEmpty()) {
             return 0;
         }
@@ -29,22 +28,18 @@ public class StringCalculator {
         if (overrideDefaultDelimiters(rawUnhandledInput)) {
             javaCompliantRegexDelimiters = parseAndGrabDelimters(rawUnhandledInput);
             actualNumbersToAdd = grabRawSummatationHalf(rawUnhandledInput);
-
         } else {
             javaCompliantRegexDelimiters = DEFAULT_DELIMITERS;
             actualNumbersToAdd = rawUnhandledInput;
         }
 
         String[] stringSegments = actualNumbersToAdd.split(javaCompliantRegexDelimiters);
-
         List<Integer> integerStream = Arrays.asList(stringSegments).stream().map(Integer::parseInt).filter(i -> i <= 1000).collect(toList());
-
         List<Integer> negativeValues = integerStream.stream().filter(i -> i < 0).collect(toList());
 
         if (negativeValues.size() > 0) {
             throw new RuntimeException("Negatives not allowed: " + negativeValues.stream().map(i -> i.toString()).collect(Collectors.joining(", ")));
         }
-
         return integerStream.stream().collect(Collectors.summingInt(Integer::intValue));
     }
 
@@ -62,7 +57,6 @@ public class StringCalculator {
             if (delimiters.split("\\[").length == 3 && delimiters.split("\\]").length == 2) {
                 return "(" + parseMultipleDefinedDelimiters(delimiters) + ")";
             }
-
             String finalLiteralStringDelim = formAndGrabLiteralStringDelim(delimiters.substring(1, delimiters.length() - 1));
             return "(" + finalLiteralStringDelim + ")";
         }
